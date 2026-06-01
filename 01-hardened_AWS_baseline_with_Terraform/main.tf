@@ -122,3 +122,12 @@ resource "aws_cloudtrail" "main" {
   depends_on = [aws_s3_bucket_policy.trail]
 
 }
+
+resource "aws_s3_bucket_public_access_block" "trail" {
+  bucket = aws_s3_bucket.trail.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
